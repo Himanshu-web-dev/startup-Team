@@ -117,6 +117,7 @@ Role: Founder
 2. Fill in your details:
    - Name
    - Email
+   - Whatsapp No.
    - Choose role (Founder or Member)
    - Create password
 3. Submit and you'll be redirected to login
