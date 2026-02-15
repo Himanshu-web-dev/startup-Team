@@ -23,6 +23,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const loginForm = document.getElementById("loginForm");
     const submitBtn = loginForm.querySelector('button[type="submit"]');
+    const googleBtn = document.querySelector('.google-btn');
+
+    // Google OAuth login
+    if (googleBtn) {
+        googleBtn.addEventListener('click', () => {
+            // Redirect to backend Google OAuth endpoint
+            const backendURL = 'http://localhost:5000';
+            window.location.href = `${backendURL}/api/auth/google`;
+        });
+    }
 
     loginForm.addEventListener("submit", async (e) => {
         e.preventDefault();

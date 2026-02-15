@@ -6,6 +6,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const resendBtn = document.getElementById("resendOtpBtn");
     const resendText = document.getElementById("resendText");
     const timerSpan = document.getElementById("timer");
+    const googleBtn = document.querySelector('.google-btn');
+
+    // Google OAuth signup
+    if (googleBtn) {
+        googleBtn.addEventListener('click', () => {
+            // Redirect to backend Google OAuth endpoint
+            const backendURL = 'http://localhost:5000';
+            window.location.href = `${backendURL}/api/auth/google`;
+        });
+    }
 
     let otpSent = false;
     let userEmail = '';
