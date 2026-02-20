@@ -4,231 +4,191 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Startup Details | StartupTeam</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
 
 <style>
-body{
-  font-family:'Plus Jakarta Sans',sans-serif;
-  background:#f4f6fb;
-  margin:0;
-  padding:40px 20px;
-}
+    :root {
+      --primary: #0f172a; /* Slate 900 */
+      --accent: #4f46e5;  /* Indigo 600 */
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #334155;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
 
-.container{max-width:1100px;margin:auto}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text-main); line-height: 1.6; }
 
-.card{
-  background:white;
-  padding:30px;
-  border-radius:18px;
-  box-shadow:0 8px 25px rgba(0,0,0,.06);
-  margin-bottom:25px;
-}
+    /* LAYOUT UTILS */
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+    
+    /* NAV */
+    .nav-bar { padding: 20px 0; display: flex; align-items: center; }
+    .back-btn { 
+      text-decoration: none; color: var(--text-main); font-weight: 600; font-size: 14px;
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; 
+      background: white; border-radius: 50px; border: 1px solid var(--border);
+      transition: 0.2s;
+    }
+    .back-btn:hover { border-color: var(--text-main); }
 
-h1{margin:0;font-size:32px}
+    /* HEADER BANNER */
+    .brand-header {
+      text-align: center; padding: 60px 20px; background: white; 
+      border-bottom: 1px solid var(--border); margin-bottom: 40px;
+    }
+    .brand-logo {
+      width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white; border-radius: 18px; display: inline-flex; align-items: center; justify-content: center;
+      font-size: 32px; font-weight: 800; margin-bottom: 20px; box-shadow: 0 10px 25px rgba(79, 70, 229, 0.2);
+    }
+    .brand-name { font-size: 42px; font-weight: 800; color: var(--primary); letter-spacing: -1.5px; margin-bottom: 8px; }
+    .brand-tagline { font-size: 20px; color: var(--text-light); font-weight: 500; max-width: 600px; margin: 0 auto 25px; }
 
-.tagline{color:#64748b;margin-top:6px}
+    .tag-cloud { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .meta-tag {
+      padding: 6px 14px; background: #f1f5f9; color: var(--text-main); border-radius: 8px;
+      font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;
+    }
 
-.badge{
-  display:inline-block;
-  padding:6px 14px;
-  border-radius:20px;
-  background:#eef2ff;
-  color:#4338ca;
-  font-size:12px;
-  font-weight:600;
-  margin-right:8px;
-  margin-top:10px;
-}
+    /* CONTENT SECTIONS */
+    .content-section { margin-bottom: 50px; }
+    .section-label { 
+      font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; 
+      color: var(--accent); margin-bottom: 15px; display: block;
+    }
+    
+    .about-text { font-size: 18px; color: var(--text-main); line-height: 1.8; }
 
-.section-title{
-  font-size:20px;
-  margin-bottom:15px;
-}
+    /* ROLE GRID */
+    .role-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    
+    .job-card {
+      background: white; border: 1px solid var(--border); border-radius: 16px; padding: 25px;
+      transition: 0.3s; position: relative; overflow: hidden; display: flex; flex-direction: column;
+    }
+    .job-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.04); }
+    
+    .job-title { font-size: 18px; font-weight: 700; color: var(--primary); margin-bottom: 5px; }
+    .job-type { font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 15px; display: inline-block; }
+    
+    .job-meta { margin-top: auto; padding-top: 15px; border-top: 1px dashed var(--border); }
+    .meta-row { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-light); margin-bottom: 6px; }
 
-.role-card{
-  border:1px solid #e2e8f0;
-  padding:18px;
-  border-radius:14px;
-  margin-bottom:15px;
-  transition:.3s;
-}
+    .apply-trigger {
+      position: absolute; bottom: 20px; right: 20px; width: 36px; height: 36px;
+      background: var(--primary); color: white; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; opacity: 0; transform: scale(0.8);
+      transition: 0.2s;
+    }
+    .job-card:hover .apply-trigger { opacity: 1; transform: scale(1); }
 
-.role-card:hover{
-  border-color:#6366f1;
-  transform:translateY(-3px);
-}
-
-.btn{
-  padding:8px 16px;
-  border:none;
-  border-radius:8px;
-  font-weight:600;
-  cursor:pointer;
-}
-
-.btn-apply{background:#22c55e;color:white}
-.btn-disabled{background:#9ca3af;color:white;cursor:not-allowed}
-
-.founder-box{
-  display:flex;
-  align-items:center;
-  gap:15px;
-}
-
-.avatar{
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  background:#6366f1;
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:22px;
-  font-weight:700;
-}
 </style>
 </head>
 <body>
 
+<div class="nav-bar container">
+  <a href="explore-startups.html" class="back-btn"><i data-lucide="arrow-left" size="14"></i> Back to Exploration</a>
+</div>
+
+<!-- CENTERED BRAND HEADER -->
+<div class="brand-header">
+  <div id="brandLogo"></div>
+  <h1 class="brand-name" id="brandName">Loading...</h1>
+  <p class="brand-tagline" id="brandTagline"></p>
+  <div class="tag-cloud" id="brandTags"></div>
+</div>
+
 <div class="container">
-
-  <!-- HEADER -->
-  <div class="card" id="startupHeader"></div>
-
-  <!-- ABOUT -->
-  <div class="card">
-    <div class="section-title">About Startup</div>
-    <div id="aboutSection"></div>
+  
+  <!-- ABOUT SECTION -->
+  <div class="content-section">
+    <span class="section-label">About The Mission</span>
+    <div class="about-text" id="aboutText"></div>
   </div>
 
-  <!-- ROLES -->
-  <div class="card">
-    <div class="section-title">Open Roles</div>
-    <div id="rolesSection"></div>
-  </div>
-
-  <!-- FOUNDER -->
-  <div class="card">
-    <div class="section-title">Founder</div>
-    <div id="founderSection"></div>
+  <!-- ROLES SECTION -->
+  <div class="content-section">
+    <span class="section-label">Open Opportunities</span>
+    <div class="role-grid" id="rolesGrid"></div>
   </div>
 
 </div>
 
 <script>
-
 /* =========================
-   FORCE DEMO DATA (Always Load)
+   DATA (Demo)
 ========================= */
-
 const demoStartups = [
   {
     id:1,
     name:"StartupTeam",
     tagline:"Connecting founders with startup-ready talent",
-    industry:"Technology",
-    stage:"MVP",
+    industry:"SaaS",
+    stage:"Seed",
     location:"Remote",
-    teamSize:"5-10",
-    description:"We are building a collaboration platform that helps early-stage startups build strong teams.",
-    founderId:101
+    teamSize:"12",
+    description:"We are reimagining how early-stage founders find their core team. By leveraging AI-driven matching and a vetted network of elite talent, we reduce hiring time by 70%. Our mission is to ensure no great idea fails because of a lack of talent.",
   },
   {
     id:2,
     name:"HealthSync",
     tagline:"AI-powered healthcare tracking",
     industry:"HealthTech",
-    stage:"Idea",
-    location:"India",
-    teamSize:"2-5",
-    description:"Building smart health monitoring solutions using AI.",
-    founderId:102
+    stage:"Pre-Seed",
+    location:"Bangalore",
+    teamSize:"4",
+    description:"Democratizing access to preventative healthcare through wearable agnostic AI analysis.",
   }
 ];
 
 const demoRoles = [
-  {id:201,startupId:1,title:"Frontend Developer",skills:"HTML, CSS, JS",exp:"0-1 Year",type:"Internship"},
-  {id:202,startupId:1,title:"Backend Developer",skills:"Node.js, Express",exp:"1+ Year",type:"Part-Time"},
-  {id:203,startupId:2,title:"UI/UX Designer",skills:"Figma, Wireframe",exp:"Any",type:"Freelance"}
-];
-
-const demoUsers = [
-  {id:101,name:"Himanshu Pathak",bio:"Full Stack Developer & Founder"},
-  {id:102,name:"Rahul Verma",bio:"Healthcare Startup Founder"}
+  {id:201,startupId:1,title:"Senior Product Designer",skills:"Figma, Design Systems",exp:"4+ Years",type:"Full-time"},
+  {id:202,startupId:1,title:"Founding Engineer",skills:"Node.js, Postgres, AWS",exp:"3+ Years",type:"Full-time"},
+  {id:203,startupId:2,title:"ML Engineer",skills:"Python, TensorFlow",exp:"2+ Years",type:"Part-time"}
 ];
 
 /* =========================
-   GET ID OR DEFAULT
+   LOGIC
 ========================= */
-
 const params = new URLSearchParams(window.location.search);
-let startupId = parseInt(params.get("id"));
-
-if(!startupId){
-  startupId = 1; // 🔥 always show first startup if no id
-}
+let startupId = parseInt(params.get("id")) || 1; 
 
 const startup = demoStartups.find(s => s.id === startupId);
 const roles = demoRoles.filter(r => r.startupId === startupId);
-const founder = demoUsers.find(u => u.id === startup.founderId);
 
-/* =========================
-   RENDER HEADER
-========================= */
+// 1. HEADER
+document.getElementById('brandLogo').innerHTML = `<div class="brand-logo">${startup.name.charAt(0)}</div>`;
+document.getElementById('brandName').innerText = startup.name;
+document.getElementById('brandTagline').innerText = startup.tagline;
 
-document.getElementById("startupHeader").innerHTML = `
-  <h1>${startup.name}</h1>
-  <div class="tagline">${startup.tagline}</div>
-  <div>
-    <span class="badge">${startup.industry}</span>
-    <span class="badge">${startup.stage}</span>
-    <span class="badge">${startup.location}</span>
-    <span class="badge">Team: ${startup.teamSize}</span>
-  </div>
+document.getElementById('brandTags').innerHTML = `
+  <div class="meta-tag"><i data-lucide="box" size="14"></i> ${startup.industry}</div>
+  <div class="meta-tag"><i data-lucide="zap" size="14"></i> ${startup.stage}</div>
+  <div class="meta-tag"><i data-lucide="map-pin" size="14"></i> ${startup.location}</div>
+  <div class="meta-tag"><i data-lucide="users" size="14"></i> ${startup.teamSize} Team Members</div>
 `;
 
-/* =========================
-   ABOUT
-========================= */
+// 2. ABOUT
+document.getElementById('aboutText').innerHTML = `<p>${startup.description}</p>`;
 
-document.getElementById("aboutSection").innerHTML =
-  `<p>${startup.description}</p>`;
-
-/* =========================
-   ROLES
-========================= */
-
-const rolesBox = document.getElementById("rolesSection");
-
-rolesBox.innerHTML = roles.map(role => `
-  <div class="role-card">
-    <h4>${role.title}</h4>
-    <p>Skills: ${role.skills}</p>
-    <p>Experience: ${role.exp}</p>
-    <p>Type: ${role.type}</p>
-    <button class="btn btn-apply">
-      Apply (Demo)
-    </button>
-  </div>
-`).join("");
-
-/* =========================
-   FOUNDER
-========================= */
-
-document.getElementById("founderSection").innerHTML = `
-  <div class="founder-box">
-    <div class="avatar">${founder.name.charAt(0)}</div>
-    <div>
-      <h4>${founder.name}</h4>
-      <p>${founder.bio}</p>
+// 3. ROLES - GRID LAYOUT
+document.getElementById('rolesGrid').innerHTML = roles.length ? roles.map(r => `
+  <div class="job-card" onclick="alert('Application Feature Coming Soon!')" style="cursor:pointer">
+    <div class="job-title">${r.title}</div>
+    <div class="job-type">${r.type}</div>
+    <div class="job-meta">
+      <div class="meta-row"><i data-lucide="clock" size="14"></i> ${r.exp} Experience</div>
+      <div class="meta-row"><i data-lucide="code" size="14"></i> ${r.skills}</div>
     </div>
+    <div class="apply-trigger"><i data-lucide="arrow-right" size="18"></i></div>
   </div>
-`;
+`).join('') : `<p style="color:var(--text-light)">No open roles at the moment.</p>`;
+
+lucide.createIcons();
 
 </script>
-
 </body>
 </html>
