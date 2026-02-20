@@ -1,194 +1,809 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Startup Details | StartupTeam</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/lucide@latest"></script>
 
-<style>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Startup Details | StartupTeam</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
     :root {
-      --primary: #0f172a; /* Slate 900 */
-      --accent: #4f46e5;  /* Indigo 600 */
+      --primary: #4f46e5;
+      --accent: #4f46e5;
+      --textaccent: #ec4899;
       --bg: #f8fafc;
       --card-bg: #ffffff;
-      --text-main: #334155;
-      --text-light: #64748b;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
       --border: #e2e8f0;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text-main); line-height: 1.6; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    /* LAYOUT UTILS */
-    .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
-    
-    /* NAV */
-    .nav-bar { padding: 20px 0; display: flex; align-items: center; }
-    .back-btn { 
-      text-decoration: none; color: var(--text-main); font-weight: 600; font-size: 14px;
-      display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; 
-      background: white; border-radius: 50px; border: 1px solid var(--border);
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+    }
+
+    /* HEADER */
+    .header {
+      text-align: center;
+      padding: 60px 20px 40px;
+      margin-bottom: 50px;
+    }
+
+
+
+    .header-title {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+
+    .header-title .accent {
+      color: var(--accent);
+    }
+
+    .header-subtitle {
+      font-size: 18px;
+      color: var(--text-muted);
+      font-weight: 500;
+      max-width: 600px;
+      margin: 5px auto 0;
+    }
+
+    /* COMPANY HERO */
+    .company-hero {
+      max-width: 1400px;
+      margin: 0 auto 50px;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .company-logo {
+      width: 120px;
+      height: 120px;
+      min-width: 120px;
+      background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--accent);
+      box-shadow: 0 4px 15px rgba(79, 70, 229, 0.15);
+      border: 2px solid #bfdbfe;
+    }
+
+    .company-info {
+      flex: 1;
+    }
+
+    .company-name {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
+
+    .company-tagline {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+
+    .company-stats {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .stat-value {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* SEARCH BAR */
+    .search-section {
+      max-width: 1400px;
+      margin: 0 auto 50px;
+      padding: 0 20px;
+    }
+
+    .filter-card {
+      background: white;
+      border-radius: 30px;
+      padding: 35px;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+      margin-bottom: 50px;
+    }
+
+    .search-container {
+      display: flex;
+      align-items: center;
+      background: #f8fafc;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      height: 48px;
+    }
+
+    .input-wrap {
+      position: relative;
+      overflow: visible;
+      border-radius: 0;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      flex: 1;
+      border-right: 1px solid var(--border);
+    }
+
+    .input-wrap:last-child {
+      border-right: none;
+      flex: 0 0 200px;
+    }
+
+    .input-wrap i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--primary);
+      pointer-events: none;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .input-wrap i svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2.5;
+    }
+
+    .input-wrap input,
+    .input-wrap select {
+      width: 100%;
+      height: 100%;
+      padding: 0 14px 0 40px;
+      border: none;
+      border-radius: 0;
+      outline: none;
+      font-size: 14px;
+      background-color: transparent;
+    }
+
+    .input-wrap select {
+      padding-right: 40px;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%234f46e5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 18px 18px;
+    }
+
+    .search-input input:focus,
+    .search-input select:focus {
+      outline: none;
+      background: white;
+      box-shadow: inset 0 0 0 1px var(--accent);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent);
+      pointer-events: none;
+      display: block;
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .search-input {
+      position: relative;
+    }
+
+    .search-input input {
+      width: 100%;
+      padding-left: 40px;
+    }
+
+    /* Lucide Icons */
+    [data-lucide] {
+      display: inline-block !important;
+      vertical-align: middle;
+    }
+
+    /* ROLES GRID */
+    .roles-section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+
+    .roles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    /* ROLE CARD */
+    .role-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 40px 28px;
+      transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+      text-decoration: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      align-items: center;
+      text-align: center;
+      min-height: 380px;
+    }
+
+    .role-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 10px 30px rgba(79, 70, 229, 0.12);
+      transform: translateY(-4px);
+    }
+
+    .role-icon {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.1);
+    }
+
+    .role-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .role-type {
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    /* SKILLS/TAGS */
+    .role-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 12px;
+      background: #f1f5f9;
+      color: var(--text-muted);
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .tag:hover {
+      background: #e2e8f0;
+    }
+
+    /* FOOTER INFO */
+    .role-footer {
+      margin-top: auto;
+      padding-top: 18px;
+      border-top: 1px dashed var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .role-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .view-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .view-btn:hover {
+      background: var(--textaccent);
+    }
+
+    /* LOGIN MODAL */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 40px;
+      border-radius: 24px;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      transform: scale(0.9);
+      transition: 0.3s;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: scale(1);
+    }
+
+    .modal-icon {
+      width: 60px;
+      height: 60px;
+      background: #eef2ff;
+      color: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .modal-title {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: #0f172a;
+    }
+
+    .modal-text {
+      color: #64748b;
+      margin-bottom: 30px;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .btn-modal {
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      font-size: 14px;
       transition: 0.2s;
     }
-    .back-btn:hover { border-color: var(--text-main); }
 
-    /* HEADER BANNER */
-    .brand-header {
-      text-align: center; padding: 60px 20px; background: white; 
-      border-bottom: 1px solid var(--border); margin-bottom: 40px;
-    }
-    .brand-logo {
-      width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary), var(--accent));
-      color: white; border-radius: 18px; display: inline-flex; align-items: center; justify-content: center;
-      font-size: 32px; font-weight: 800; margin-bottom: 20px; box-shadow: 0 10px 25px rgba(79, 70, 229, 0.2);
-    }
-    .brand-name { font-size: 42px; font-weight: 800; color: var(--primary); letter-spacing: -1.5px; margin-bottom: 8px; }
-    .brand-tagline { font-size: 20px; color: var(--text-light); font-weight: 500; max-width: 600px; margin: 0 auto 25px; }
-
-    .tag-cloud { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-    .meta-tag {
-      padding: 6px 14px; background: #f1f5f9; color: var(--text-main); border-radius: 8px;
-      font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;
+    .btn-primary {
+      background: var(--accent);
+      color: white;
     }
 
-    /* CONTENT SECTIONS */
-    .content-section { margin-bottom: 50px; }
-    .section-label { 
-      font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; 
-      color: var(--accent); margin-bottom: 15px; display: block;
+    .btn-primary:hover {
+      background: var(--textaccent);
     }
-    
-    .about-text { font-size: 18px; color: var(--text-main); line-height: 1.8; }
 
-    /* ROLE GRID */
-    .role-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-    
-    .job-card {
-      background: white; border: 1px solid var(--border); border-radius: 16px; padding: 25px;
-      transition: 0.3s; position: relative; overflow: hidden; display: flex; flex-direction: column;
+    .btn-secondary {
+      background: #f1f5f9;
+      color: #0f172a;
     }
-    .job-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.04); }
-    
-    .job-title { font-size: 18px; font-weight: 700; color: var(--primary); margin-bottom: 5px; }
-    .job-type { font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 15px; display: inline-block; }
-    
-    .job-meta { margin-top: auto; padding-top: 15px; border-top: 1px dashed var(--border); }
-    .meta-row { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-light); margin-bottom: 6px; }
 
-    .apply-trigger {
-      position: absolute; bottom: 20px; right: 20px; width: 36px; height: 36px;
-      background: var(--primary); color: white; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; opacity: 0; transform: scale(0.8);
-      transition: 0.2s;
+    .btn-secondary:hover {
+      background: #e2e8f0;
     }
-    .job-card:hover .apply-trigger { opacity: 1; transform: scale(1); }
-
-</style>
+  </style>
 </head>
+
 <body>
 
-<div class="nav-bar container">
-  <a href="explore-startups.html" class="back-btn"><i data-lucide="arrow-left" size="14"></i> Back to Exploration</a>
-</div>
-
-<!-- CENTERED BRAND HEADER -->
-<div class="brand-header">
-  <div id="brandLogo"></div>
-  <h1 class="brand-name" id="brandName">Loading...</h1>
-  <p class="brand-tagline" id="brandTagline"></p>
-  <div class="tag-cloud" id="brandTags"></div>
-</div>
-
-<div class="container">
-  
-  <!-- ABOUT SECTION -->
-  <div class="content-section">
-    <span class="section-label">About The Mission</span>
-    <div class="about-text" id="aboutText"></div>
+  <div class="header">
+    <h1 class="header-title">Our <span class="accent">Opportunities</span></h1>
+    <p class="header-subtitle" id="headerSubtitle">Find your next role at an innovative startup.</p>
   </div>
 
-  <!-- ROLES SECTION -->
-  <div class="content-section">
-    <span class="section-label">Open Opportunities</span>
-    <div class="role-grid" id="rolesGrid"></div>
-  </div>
-
-</div>
-
-<script>
-/* =========================
-   DATA (Demo)
-========================= */
-const demoStartups = [
-  {
-    id:1,
-    name:"StartupTeam",
-    tagline:"Connecting founders with startup-ready talent",
-    industry:"SaaS",
-    stage:"Seed",
-    location:"Remote",
-    teamSize:"12",
-    description:"We are reimagining how early-stage founders find their core team. By leveraging AI-driven matching and a vetted network of elite talent, we reduce hiring time by 70%. Our mission is to ensure no great idea fails because of a lack of talent.",
-  },
-  {
-    id:2,
-    name:"HealthSync",
-    tagline:"AI-powered healthcare tracking",
-    industry:"HealthTech",
-    stage:"Pre-Seed",
-    location:"Bangalore",
-    teamSize:"4",
-    description:"Democratizing access to preventative healthcare through wearable agnostic AI analysis.",
-  }
-];
-
-const demoRoles = [
-  {id:201,startupId:1,title:"Senior Product Designer",skills:"Figma, Design Systems",exp:"4+ Years",type:"Full-time"},
-  {id:202,startupId:1,title:"Founding Engineer",skills:"Node.js, Postgres, AWS",exp:"3+ Years",type:"Full-time"},
-  {id:203,startupId:2,title:"ML Engineer",skills:"Python, TensorFlow",exp:"2+ Years",type:"Part-time"}
-];
-
-/* =========================
-   LOGIC
-========================= */
-const params = new URLSearchParams(window.location.search);
-let startupId = parseInt(params.get("id")) || 1; 
-
-const startup = demoStartups.find(s => s.id === startupId);
-const roles = demoRoles.filter(r => r.startupId === startupId);
-
-// 1. HEADER
-document.getElementById('brandLogo').innerHTML = `<div class="brand-logo">${startup.name.charAt(0)}</div>`;
-document.getElementById('brandName').innerText = startup.name;
-document.getElementById('brandTagline').innerText = startup.tagline;
-
-document.getElementById('brandTags').innerHTML = `
-  <div class="meta-tag"><i data-lucide="box" size="14"></i> ${startup.industry}</div>
-  <div class="meta-tag"><i data-lucide="zap" size="14"></i> ${startup.stage}</div>
-  <div class="meta-tag"><i data-lucide="map-pin" size="14"></i> ${startup.location}</div>
-  <div class="meta-tag"><i data-lucide="users" size="14"></i> ${startup.teamSize} Team Members</div>
-`;
-
-// 2. ABOUT
-document.getElementById('aboutText').innerHTML = `<p>${startup.description}</p>`;
-
-// 3. ROLES - GRID LAYOUT
-document.getElementById('rolesGrid').innerHTML = roles.length ? roles.map(r => `
-  <div class="job-card" onclick="alert('Application Feature Coming Soon!')" style="cursor:pointer">
-    <div class="job-title">${r.title}</div>
-    <div class="job-type">${r.type}</div>
-    <div class="job-meta">
-      <div class="meta-row"><i data-lucide="clock" size="14"></i> ${r.exp} Experience</div>
-      <div class="meta-row"><i data-lucide="code" size="14"></i> ${r.skills}</div>
+  <!-- SEARCH & FILTERS -->
+  <div class="search-section">
+    <div class="filter-card">
+      <div class="search-container">
+        <div class="input-wrap"><i data-lucide="search"></i><input type="text" placeholder="Search by role, skill..." onkeyup="filter()"></div>
+        <div class="input-wrap"><i data-lucide="map-pin"></i><input type="text" placeholder="Location..." onkeyup="filter()"></div>
+        <div class="input-wrap"><select onchange="filter()">
+            <option value="all">All Types</option>
+            <option value="Full-Time">Full-Time</option>
+            <option value="Contract">Contract</option>
+            <option value="Part-Time">Part-Time</option>
+          </select></div>
+      </div>
     </div>
-    <div class="apply-trigger"><i data-lucide="arrow-right" size="18"></i></div>
   </div>
-`).join('') : `<p style="color:var(--text-light)">No open roles at the moment.</p>`;
 
-lucide.createIcons();
+  <!-- ROLES GRID -->
+  <div class="roles-section">
+    <div class="roles-grid" id="rolesGrid">
+      <!-- Roles will be populated here -->
+    </div>
+  </div>
 
-</script>
+  <!-- LOGIN MODAL -->
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal-content">
+      <div class="modal-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </div>
+      <div class="modal-title">Sign In Required</div>
+      <div class="modal-text">Please log in to your account to apply for this position.</div>
+      <div class="modal-actions">
+        <button class="btn-modal btn-secondary"
+          onclick="document.getElementById('loginModal').classList.remove('active')">Maybe Later</button>
+        <button class="btn-modal btn-primary" onclick="window.location.href='./login.html'">Login Now</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Initialize lucide icons immediately
+    lucide.createIcons();
+
+    const data = {
+      startups: [
+        {
+          id: 1,
+          name: "StartupTeam",
+          tagline: "Building the future of team formation",
+          location: "Remote",
+          stage: "Seed",
+          size: "12",
+          description: "We are reimagining how early-stage founders find their core team. By leveraging AI-driven matching and a vetted network of elite talent, we reduce hiring time by 70%.",
+          roles: [
+            { title: "Senior Product Designer", type: "Full-Time", skills: ["Figma", "Design Systems", "Prototyping"], exp: "4+ Years" },
+            { title: "Founding Engineer", type: "Full-Time", skills: ["Node.js", "Postgres", "AWS", "Docker"], exp: "3+ Years" },
+            { title: "Growth Marketer", type: "Contract", skills: ["SEO", "Content", "Analytics"], exp: "2+ Years" },
+            { title: "Product Manager", type: "Full-Time", skills: ["Product Strategy", "User Research", "Analytics"], exp: "3+ Years" },
+            { title: "Backend Engineer", type: "Full-Time", skills: ["TypeScript", "Node.js", "GraphQL"], exp: "3+ Years" },
+            { title: "DevOps Engineer", type: "Full-Time", skills: ["Kubernetes", "AWS", "Terraform"], exp: "2+ Years" },
+            { title: "QA Engineer", type: "Full-Time", skills: ["Jest", "Cypress", "Automation"], exp: "2+ Years" },
+            { title: "Data Analyst", type: "Full-Time", skills: ["SQL", "Analytics", "Tableau"], exp: "2+ Years" },
+            { title: "Sales Engineer", type: "Full-Time", skills: ["B2B Sales", "Technical Demos"], exp: "2+ Years" },
+            { title: "Content Writer", type: "Contract", skills: ["Technical Writing", "SEO", "Blogs"], exp: "1+ Years" }
+          ]
+        },
+        {
+          id: 2,
+          name: "HealthSync",
+          tagline: "AI-powered healthcare tracking",
+          location: "Bangalore",
+          stage: "Pre-Seed",
+          size: "4",
+          description: "Democratizing access to preventative healthcare through wearable agnostic AI analysis.",
+          roles: [
+            { title: "ML Engineer", type: "Full-Time", skills: ["Python", "TensorFlow", "PyTorch"], exp: "2+ Years" },
+            { title: "Full Stack Developer", type: "Full-Time", skills: ["React", "Node.js", "MongoDB"], exp: "3+ Years" },
+            { title: "Medical Researcher", type: "Full-Time", skills: ["Healthcare", "Data Analysis", "Clinical"], exp: "2+ Years" },
+            { title: "DevOps Engineer", type: "Full-Time", skills: ["Docker", "Kubernetes", "AWS"], exp: "2+ Years" },
+            { title: "iOS Developer", type: "Full-Time", skills: ["Swift", "iOS", "CoreData"], exp: "2+ Years" },
+            { title: "Security Specialist", type: "Full-Time", skills: ["HIPAA", "Compliance", "Security"], exp: "3+ Years" },
+            { title: "Product Manager", type: "Full-Time", skills: ["Healthcare Tech", "User Research"], exp: "2+ Years" },
+            { title: "Data Scientist", type: "Full-Time", skills: ["Python", "ML", "Statistics"], exp: "2+ Years" },
+            { title: "Frontend Engineer", type: "Full-Time", skills: ["React", "TypeScript", "CSS"], exp: "2+ Years" },
+            { title: "Backend Architect", type: "Full-Time", skills: ["Microservices", "Node.js", "AWS"], exp: "4+ Years" }
+          ]
+        },
+        {
+          id: 3,
+          name: "EcoTrack",
+          tagline: "Carbon tracking for enterprises",
+          location: "San Francisco",
+          stage: "Series A",
+          size: "25",
+          description: "Help enterprises measure, monitor, and reduce their carbon footprint with our intuitive SaaS platform and AI-powered insights.",
+          roles: [
+            { title: "Backend Engineer", type: "Full-Time", skills: ["Go", "Kubernetes", "PostgreSQL"], exp: "4+ Years" },
+            { title: "Data Scientist", type: "Full-Time", skills: ["Python", "ML", "Data Analysis"], exp: "3+ Years" },
+            { title: "DevOps Engineer", type: "Full-Time", skills: ["AWS", "Docker", "CI/CD"], exp: "3+ Years" },
+            { title: "Sales Engineer", type: "Full-Time", skills: ["Enterprise Sales", "Technical Demos"], exp: "2+ Years" },
+            { title: "Frontend Engineer", type: "Full-Time", skills: ["React", "D3.js", "Visualization"], exp: "3+ Years" },
+            { title: "Environmental Specialist", type: "Full-Time", skills: ["Sustainability", "Data Analysis"], exp: "2+ Years" },
+            { title: "Business Analyst", type: "Full-Time", skills: ["Enterprise", "Process Improvement"], exp: "2+ Years" },
+            { title: "Product Manager", type: "Full-Time", skills: ["B2B SaaS", "User Research"], exp: "3+ Years" },
+            { title: "Solutions Architect", type: "Full-Time", skills: ["Enterprise Architecture", "AWS"], exp: "4+ Years" },
+            { title: "UI/UX Designer", type: "Full-Time", skills: ["Figma", "Data Visualization"], exp: "2+ Years" }
+          ]
+        },
+        {
+          id: 4,
+          name: "FintechFlow",
+          tagline: "Banking for the modern era",
+          location: "New York",
+          stage: "Seed",
+          size: "8",
+          description: "Open banking infrastructure enabling developers to build financial applications 10x faster with our APIs and developer tools.",
+          roles: [
+            { title: "Senior Backend Engineer", type: "Full-Time", skills: ["Java", "Spring Boot", "Microservices"], exp: "5+ Years" },
+            { title: "Product Manager", type: "Full-Time", skills: ["Product Strategy", "Analytics", "User Research"], exp: "3+ Years" },
+            { title: "Frontend Engineer", type: "Full-Time", skills: ["React", "TypeScript", "Redux"], exp: "3+ Years" },
+            { title: "Security Engineer", type: "Full-Time", skills: ["Security Architecture", "Compliance", "Banking"], exp: "4+ Years" },
+            { title: "Mobile Developer", type: "Full-Time", skills: ["React Native", "iOS", "Android"], exp: "3+ Years" },
+            { title: "QA Automation Lead", type: "Full-Time", skills: ["Test Automation", "Selenium", "Java"], exp: "3+ Years" },
+            { title: "DevOps Engineer", type: "Full-Time", skills: ["Kubernetes", "AWS", "Infrastructure"], exp: "3+ Years" },
+            { title: "Data Engineer", type: "Full-Time", skills: ["Python", "Spark", "Data Pipelines"], exp: "2+ Years" },
+            { title: "API Developer", type: "Full-Time", skills: ["REST APIs", "GraphQL", "Node.js"], exp: "2+ Years" },
+            { title: "Compliance Officer", type: "Full-Time", skills: ["Banking Compliance", "Regulatory"], exp: "3+ Years" }
+          ]
+        },
+        {
+          id: 5,
+          name: "CreativeAI",
+          tagline: "AI-powered design tool for creators",
+          location: "Los Angeles",
+          stage: "Pre-Seed",
+          size: "5",
+          description: "Empower creators with AI-assisted design tools that make professional design accessible to everyone, regardless of skill level.",
+          roles: [
+            { title: "AI/ML Engineer", type: "Full-Time", skills: ["PyTorch", "Computer Vision", "CUDA"], exp: "2+ Years" },
+            { title: "Frontend Engineer", type: "Full-Time", skills: ["React", "WebGL", "TypeScript"], exp: "3+ Years" },
+            { title: "UI/UX Designer", type: "Full-Time", skills: ["Figma", "User Testing", "Prototyping"], exp: "2+ Years" },
+            { title: "Backend Engineer", type: "Full-Time", skills: ["Python", "FastAPI", "PostgreSQL"], exp: "2+ Years" },
+            { title: "Computer Vision Engineer", type: "Full-Time", skills: ["OpenCV", "Deep Learning", "Image Processing"], exp: "2+ Years" },
+            { title: "Generative AI Specialist", type: "Full-Time", skills: ["GPT", "Transformers", "LLMs"], exp: "2+ Years" },
+            { title: "DevOps Engineer", type: "Full-Time", skills: ["Docker", "AWS", "CI/CD"], exp: "2+ Years" },
+            { title: "Product Manager", type: "Full-Time", skills: ["AI/ML Products", "User Research"], exp: "2+ Years" },
+            { title: "Data Engineer", type: "Full-Time", skills: ["Python", "Data Pipeline", "ETL"], exp: "2+ Years" },
+            { title: "Community Manager", type: "Full-Time", skills: ["Community Building", "Developer Relations"], exp: "1+ Years" }
+          ]
+        },
+        {
+          id: 6,
+          name: "LogisticX",
+          tagline: "Supply chain optimization platform",
+          location: "Singapore",
+          stage: "Series A",
+          size: "30",
+          description: "Real-time visibility and optimization of supply chains using IoT, AI, and advanced analytics for global enterprises.",
+          roles: [
+            { title: "Solutions Architect", type: "Full-Time", skills: ["AWS", "System Design", "IoT"], exp: "4+ Years" },
+            { title: "Business Development", type: "Full-Time", skills: ["Sales", "Account Management", "Enterprise"], exp: "3+ Years" },
+            { title: "QA Engineer", type: "Contract", skills: ["Testing", "Selenium", "Automation"], exp: "2+ Years" },
+            { title: "Technical Writer", type: "Full-Time", skills: ["Documentation", "Technical Writing", "API Docs"], exp: "2+ Years" },
+            { title: "Supply Chain Analyst", type: "Full-Time", skills: ["Supply Chain", "Analytics", "Optimization"], exp: "2+ Years" },
+            { title: "IoT Engineer", type: "Full-Time", skills: ["IoT", "Embedded Systems", "Hardware"], exp: "2+ Years" },
+            { title: "Backend Engineer", type: "Full-Time", skills: ["Node.js", "MongoDB", "Real-time Systems"], exp: "3+ Years" },
+            { title: "Frontend Engineer", type: "Full-Time", skills: ["React", "Dashboard Design", "Data Viz"], exp: "2+ Years" },
+            { title: "Customer Success Manager", type: "Full-Time", skills: ["Account Management", "SaaS"], exp: "2+ Years" },
+            { title: "Systems Trainer", type: "Full-Time", skills: ["Training", "Technical Support", "Documentation"], exp: "2+ Years" }
+          ]
+        },
+        {
+          id: 7,
+          name: "EduLeap",
+          tagline: "Personalized learning platform powered by AI",
+          location: "Toronto",
+          stage: "Seed",
+          size: "11",
+          description: "Revolutionizing K-12 education with adaptive learning paths and real-time student analytics that help teachers personalize instruction.",
+          roles: [
+            { title: "Senior Full Stack Engineer", type: "Full-Time", skills: ["React", "Node.js", "PostgreSQL", "GraphQL"], exp: "4+ Years" },
+            { title: "Machine Learning Engineer", type: "Full-Time", skills: ["Python", "Scikit-learn", "Educational Data"], exp: "2+ Years" },
+            { title: "Content Strategist", type: "Full-Time", skills: ["Curriculum Design", "Instructional Design"], exp: "3+ Years" },
+            { title: "DevOps Engineer", type: "Full-Time", skills: ["Kubernetes", "Terraform", "Azure"], exp: "3+ Years" },
+            { title: "QA Automation Engineer", type: "Full-Time", skills: ["Cypress", "Jest", "API Testing"], exp: "2+ Years" },
+            { title: "Frontend Engineer", type: "Full-Time", skills: ["React", "Tailwind", "Responsive"], exp: "2+ Years" },
+            { title: "Mobile Developer", type: "Full-Time", skills: ["React Native", "Mobile Apps"], exp: "2+ Years" },
+            { title: "Product Manager", type: "Full-Time", skills: ["EdTech", "User Research"], exp: "2+ Years" },
+            { title: "Data Analyst", type: "Full-Time", skills: ["Analytics", "Python", "Data Visualization"], exp: "2+ Years" },
+            { title: "UI Designer", type: "Full-Time", skills: ["Figma", "Design Systems", "Accessibility"], exp: "2+ Years" }
+          ]
+        },
+        {
+          id: 8,
+          name: "SecureVault",
+          tagline: "Enterprise password management solution",
+          location: "Austin",
+          stage: "Series B",
+          size: "45",
+          description: "Zero-knowledge encryption password manager trusted by enterprises to secure their digital identities with military-grade security.",
+          roles: [
+            { title: "Security Engineer", type: "Full-Time", skills: ["Cryptography", "Penetration Testing", "C++"], exp: "5+ Years" },
+            { title: "Cloud Architect", type: "Full-Time", skills: ["GCP", "Multi-cloud", "Architecture"], exp: "4+ Years" },
+            { title: "Sales Engineer", type: "Full-Time", skills: ["Enterprise Sales", "Technical Demos"], exp: "2+ Years" },
+            { title: "Frontend Engineer", type: "Full-Time", skills: ["React", "Electron", "Security UI"], exp: "3+ Years" },
+            { title: "Backend Engineer", type: "Full-Time", skills: ["Go", "Encryption", "Performance"], exp: "4+ Years" },
+            { title: "DevOps Engineer", type: "Full-Time", skills: ["Kubernetes", "GCP", "Monitoring"], exp: "3+ Years" },
+            { title: "Security Analyst", type: "Full-Time", skills: ["Threat Analysis", "Compliance"], exp: "2+ Years" },
+            { title: "Product Manager", type: "Full-Time", skills: ["Security Products", "Enterprise"], exp: "3+ Years" },
+            { title: "QA Engineer", type: "Full-Time", skills: ["Security Testing", "Vulnerability"], exp: "2+ Years" },
+            { title: "Technical Support Lead", type: "Full-Time", skills: ["Customer Support", "Security"], exp: "2+ Years" }
+          ]
+        },
+        {
+          id: 9,
+          name: "GreenGrid",
+          tagline: "Renewable energy marketplace",
+          location: "Berlin",
+          stage: "Pre-Seed",
+          size: "7",
+          description: "Connecting renewable energy producers with commercial buyers through a transparent, blockchain-based energy trading platform.",
+          roles: [
+            { title: "Blockchain Developer", type: "Full-Time", skills: ["Solidity", "Web3", "Ethereum"], exp: "2+ Years" },
+            { title: "Backend Engineer", type: "Full-Time", skills: ["Python", "FastAPI", "MongoDB"], exp: "2+ Years" },
+            { title: "Energy Analyst", type: "Contract", skills: ["Energy Markets", "Analytics"], exp: "3+ Years" },
+            { title: "Frontend Engineer", type: "Full-Time", skills: ["React", "Web3.js", "D3.js"], exp: "2+ Years" },
+            { title: "Smart Contract Auditor", type: "Full-Time", skills: ["Solidity", "Security Audit"], exp: "3+ Years" },
+            { title: "Renewable Energy Specialist", type: "Full-Time", skills: ["Renewable Energy", "Trading"], exp: "2+ Years" },
+            { title: "DevOps Engineer", type: "Full-Time", skills: ["Kubernetes", "Blockchain Nodes"], exp: "2+ Years" },
+            { title: "Product Manager", type: "Full-Time", skills: ["Energy Tech", "Marketplace Design"], exp: "2+ Years" },
+            { title: "Business Development", type: "Full-Time", skills: ["Energy Partnerships", "Business"], exp: "2+ Years" },
+            { title: "Community Manager", type: "Full-Time", skills: ["Community", "Social Media"], exp: "1+ Years" }
+          ]
+        },
+        {
+          id: 10,
+          name: "VoiceFlow",
+          tagline: "Voice AI for customer service",
+          location: "San Francisco",
+          stage: "Series A",
+          size: "28",
+          description: "AI-powered voice assistant platform helping enterprises automate customer service with natural conversations and seamless handoffs.",
+          roles: [
+            { title: "NLP Engineer", type: "Full-Time", skills: ["NLP", "Transformers", "Python"], exp: "3+ Years" },
+            { title: "Frontend Engineer", type: "Full-Time", skills: ["Vue.js", "TypeScript", "Responsive Design"], exp: "3+ Years" },
+            { title: "Customer Success Manager", type: "Full-Time", skills: ["Account Management", "SaaS"], exp: "2+ Years" },
+            { title: "Audio Engineer", type: "Full-Time", skills: ["Audio Processing", "Speech Recognition", "DSP"], exp: "2+ Years" },
+            { title: "Backend Engineer", type: "Full-Time", skills: ["Node.js", "Real-time Systems", "WebSocket"], exp: "3+ Years" },
+            { title: "Machine Learning Engineer", type: "Full-Time", skills: ["Deep Learning", "Speech Models", "PyTorch"], exp: "2+ Years" },
+            { title: "DevOps Engineer", type: "Full-Time", skills: ["AWS", "Kubernetes", "Monitoring"], exp: "2+ Years" },
+            { title: "Product Manager", type: "Full-Time", skills: ["Voice AI", "Enterprise SaaS"], exp: "3+ Years" },
+            { title: "QA Engineer", type: "Full-Time", skills: ["Voice Testing", "Automation"], exp: "2+ Years" },
+            { title: "Sales Engineer", type: "Full-Time", skills: ["B2B Sales", "Technical Demos"], exp: "2+ Years" }
+          ]
+        }
+      ]
+    };
+
+    // Check if user is logged in
+    function isUserLoggedIn() {
+      const user = localStorage.getItem('user');
+      return !!user;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const startupId = parseInt(params.get('id')) || 1;
+    const startup = data.startups.find(s => s.id === startupId);
+
+    if (startup) {
+      // Header subtitle
+      const headerSubtitle = document.getElementById('headerSubtitle');
+      if (headerSubtitle) headerSubtitle.innerText = `Exciting roles at ${startup.name}`;
+
+      // Roles
+      const rolesGrid = document.getElementById('rolesGrid');
+      if (rolesGrid) {
+        rolesGrid.innerHTML = startup.roles.map(role => `
+            <div class="role-card">
+                <div class="role-icon">${role.title.charAt(0).toUpperCase()}</div>
+                <h3 class="role-title">${role.title}</h3>
+                <div class="role-type">${role.type}</div>
+                <div class="role-tags">
+                    ${role.skills.map(skill => `<span class="tag">${skill}</span>`).join('')}
+                </div>
+                <div class="role-footer">
+                    <div class="role-meta">
+                        <i data-lucide="clock" size="14"></i> ${role.exp}
+                    </div>
+                    <button class="view-btn">Apply</button>
+                </div>
+            </div>
+        `).join('');
+
+        // Add click listeners to all Apply buttons
+        const applyButtons = document.querySelectorAll('.view-btn');
+        applyButtons.forEach(button => {
+          button.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (!isUserLoggedIn()) {
+              document.getElementById('loginModal').classList.add('active');
+            } else {
+              alert('Application submitted for the role!');
+            }
+          });
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('loginModal').addEventListener('click', function (e) {
+          if (e.target === this) {
+            this.classList.remove('active');
+          }
+        });
+
+        // Close modal when pressing ESC key
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' || e.keyCode === 27) {
+            const loginModal = document.getElementById('loginModal');
+            if (loginModal.classList.contains('active')) {
+              loginModal.classList.remove('active');
+            }
+          }
+        });
+
+        lucide.createIcons();
+      }
+    }
+
+    // Initialize icons again to catch search icons
+    lucide.createIcons();
+  </script>
 </body>
+
 </html>
